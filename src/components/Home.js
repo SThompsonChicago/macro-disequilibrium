@@ -38,11 +38,22 @@ const initialState = {
     govHatAve: [],
     uVals: [],
     uAve: [],
-    stateVals: [1, 1, 1, 1],
+    stateVals: [0.05, 0.01, 0.05, 0.05],
     time: 0,
     periods: 0,
     mil: 250,
-    gamma: gamma0 + 0.01 * (Math.random() - 0.5)
+    gamma: gamma0 + 0.01 * (Math.random() - 0.5),
+    rho: 0.5,
+    theta: 0.6,
+    tau: 0.3,
+    psi: 0.5,
+    i: 0.01,
+    delta: 0.06,
+    ud: 0.7,
+    eta: 1000,
+    capB: 0.04,
+    xi: 25,
+    sigma: 0.4,
 }
 
 export default function Home() {
@@ -207,6 +218,26 @@ function update(arr1, arr2, n){
 
 
     return num;
+}
+
+function f(arr, obj){
+    let arr1 = Array(4);
+    let lambda = 1/(obj.rho * (1 - obj.theta * (1 - obj.tau) * (1 - obj.psi)));
+    let u = lambda * (arr[0] + arr[1] + arr[2]);
+    let r = (1 - obj.tau) * (1 - obj.psi) * obj.rho * u;
+    let g = arr[1] + obj.theta * r;
+    let phi = obj.eta * arr[1] * (obj.capB - arr[1]);
+
+    arr1[0] = arr[0] * (obj.gamma - g + obj.delta);
+    arr1[1] = phi * (u - obj.ud);
+    arr1[2] = arr[2] * (obj.xi * (arr[3] - obj.sigma * u) - g + obj.delta);
+    arr1[3] = (1 - obj.tau) * (u + obj.i * arr[3]) - arr[2] - g - arr[3] * (g - obj.delta);
+
+    return arr1;
+}
+
+function rk(arr){
+    return null;
 }
 
 function reducer(state, action){
