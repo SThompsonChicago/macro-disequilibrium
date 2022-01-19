@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/macro-disequilibrium/static/css/main.e6c13ad2.css",
-    "main.js": "/macro-disequilibrium/static/js/main.d3b33ab1.js",
+    "main.js": "/macro-disequilibrium/static/js/main.c52789fc.js",
     "index.html": "/macro-disequilibrium/index.html",
     "main.e6c13ad2.css.map": "/macro-disequilibrium/static/css/main.e6c13ad2.css.map",
-    "main.d3b33ab1.js.map": "/macro-disequilibrium/static/js/main.d3b33ab1.js.map"
+    "main.c52789fc.js.map": "/macro-disequilibrium/static/js/main.c52789fc.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.d3b33ab1.js"
+    "static/js/main.c52789fc.js"
   ]
 }
