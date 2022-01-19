@@ -38,10 +38,10 @@ const initialState = {
     govHatAve: [],
     uVals: [],
     uAve: [],
-    stateVals: [0.05, 0.01, 0.05, 0.05],
+    stateVals: [0.13, 0.02, 0.07, 0.06],
     time: 0,
     periods: 0,
-    mil: 500,
+    mil: 250,
     gamma: gamma0 + 0.01 * (Math.random() - 0.5),
     rho: 0.5,
     theta: 0.6,
@@ -328,7 +328,7 @@ function update(arr1, arr2, n){
     var num2 = 0;
     arr1.push(num);
     num2 = arr1.reduce((x, y) => x+y);
-    num2 = num2/(2*n);
+    num2 = num2/n;
     arr2.push(num2);
 
 
@@ -400,12 +400,12 @@ function rk(arr, obj){
 
   obj.kHatVals.push(g - obj.delta);
   num1 = obj.kHatVals.reduce((x, y) => x+y);
-  num1 = num1/(2*(obj.time + 1));
+  num1 = num1/(obj.time + 1);
   obj.kHatAve.push(num1);
 
   obj.uVals.push(u);
   num2 = obj.uVals.reduce((x,y) => x+y);
-  num2 = num2/(2*(obj.time + 1));
+  num2 = num2/(obj.time + 1);
   obj.uAve.push(num2);
 
   return current;
