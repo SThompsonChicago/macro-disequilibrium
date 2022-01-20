@@ -26,10 +26,10 @@ function Header() {
       </figure>                
       </div>
       <div className="media-content">
-                <p className="title is-size-4-mobile">
+                <p className="title is-size-6-mobile">
                     Macroeconomic Disequilibrium Simulator
                 </p>
-                <p className="subtitle is-size-4-mobile">
+                <p className="subtitle is-size-6-mobile">
                     Using time averages to understand long-run dynamics
                 </p>
                 

@@ -37,7 +37,7 @@ const initialState = {
     govHatAve: [],
     uVals: [],
     uAve: [],
-    stateVals: [0.13, 0.02, 0.07, 0.06],
+    stateVals: [0.1, 0.005, 0.0162, 0.132],
     time: 0,
     periods: 0,
     mil: 250,
@@ -273,7 +273,7 @@ export default function Home() {
           labels: xValues(state.time),
           datasets: [
             {
-              label: 'Rate of capital accumulation',
+              label: 'Annual rate of capital accumulation',
               data: state.kHatVals,
               // backgroundColor: [
               //   'rgba(255, 99, 132, 0.2)',
@@ -386,7 +386,7 @@ export default function Home() {
           labels: xValues(state.time),
           datasets: [
             {
-              label: 'Growth rate of government spending',
+              label: 'Annual growth rate of government spending',
               data: state.govHatVals,
               // backgroundColor: [
               //   'rgba(255, 99, 132, 0.2)',
@@ -447,7 +447,7 @@ export default function Home() {
                             </br>
                             <br>
                             </br>
-                            A key stumbling block is the fact that modern economic systems are comprised of billions of interacting variables (consumers, businesses, commodities, prices and so on). Generally it is very difficult to establish stability for systems that have more than a few different variables. Moreover, when a system has a large number of variables, there are good reasons to expect it to be chaotic, rather than stable. Finally, the famous Sonnenschein-Mantel-Debreu theorem suggests that, if we adopt the standard notions of equilibrium and price adjustment from economic theory, then stability cannot be guaranteed. 
+                            A key stumbling block is the fact that modern economic systems are comprised of billions of interacting variables (consumers, businesses, commodities, prices and so on). Generally it is very difficult to establish stability for systems that have more than a few different variables. Moreover, when a system has a large number of variables, there are good reasons to expect it to be chaotic, rather than stable. Finally, the famous Sonnenschein-Mantel-Debreu theorem suggests that, if we adopt the standard notions of equilibrium and price adjustment from economic theory, then stability cannot be guaranteed. Motivated by these ideas, economists have developed a variety of disequilibrium frameworks; this app shows one example, but there are others as well. 
                             </p>
 
 
@@ -457,7 +457,7 @@ export default function Home() {
                             A sketch of the model
                             </p>
                             <p>
-                            This app is based on the model in a recently published paper, which is available <a href="">here</a>. A much shorter statement of the model used in this app (with details about the simulations), which just lays out the basic assumptions and equations, can be found <a href="">here</a>. What follows below is a non-technical explanation. 
+                            This app is based on the model in a recently published paper, which is available <a href='https://onlinelibrary.wiley.com/doi/10.1111/meca.12377'>here</a>. A much shorter statement of the model used in this app (with details about the simulations), which just lays out the basic assumptions and equations, can be found <a href='https://sthompsonchicago.github.io/My_portfolio/assets/MacroDisequilibrium.pdf'>here</a>. What follows below is a non-technical explanation. 
                             <br>
                             </br>
                             <br>
@@ -467,13 +467,17 @@ export default function Home() {
                             </br>
                             <br>
                             </br>
-                            The mechanics of this model can be understood as follows. Businesses try to increase (or at least maintain) their market shares over time, which means they must try to keep up with changes in the demand for their products. So they adjust output, as well as investment in new productive capacity, in response to the market. But there are also limits on how much businesses can (or want) to borrow, and this means that there is an upper limit for how rapidly they can expand productive capacity; this limit depends on expectations regarding future cashflow. Similarly, consumers also face an important financial constraint, and this is expressed by the fact that they adjust their spending based on how much cash they have to spend. More precisely, they seek to keep their net financial wealth at a certain targeted level in relation to national income, and adjust spending over time in an attempt to meet this target. (This targetted ratio of wealth to income is called a <i>stock-flow norm</i>.)
+                            The mechanics of this model can be understood as follows. Businesses have <a href='https://hbr.org/1975/01/market-share-a-key-to-profitability'>important incentives</a> for trying to increase (or at least maintain) their market shares over time. As a result, they must try to keep up with increases in the demand for their products. So they adjust output, as well as investment in new productive capacity, in response to conditions in the market. But there are also constraints on how much businesses can (or want) to borrow, and this means that there is an upper limit for how rapidly they can expand productive capacity; this limit depends on expectations regarding future cashflow. Similarly, consumers also face an important financial constraint, and this is expressed by the fact that they adjust their spending based on how much cash they have to spend. More precisely, they seek to keep their net financial wealth at a certain targeted level in relation to national income, and adjust spending over time in an attempt to meet this target. (This targetted ratio of wealth to income is called a <i>stock-flow norm</i>.)
                             <br>
                             </br>
                             <br>
                             </br>
                             An important feature of the model is that productive investment and consumption demand are largely <i>induced</i>, in the sense that they respond to changes in financial inflows from other sectors. As a result, if there is a third component of aggregate demand that grows at a semi-autonomous rate, then it will play a special role in driving the rate of expansion for the economy for the economy as a whole. Economists have identified a variety of different components that might fullfill this role in practice, including government spending, exports, and debt-financed real-estate investment. For the purposes of illustration, the model here only considers the role of government spending, but it could easily be generalized to include exports and real-estate mortgages as well. 
-
+                            <br>
+                            </br>
+                            <br>
+                            </br>
+                            The dynamical processes in this model tend to be destabilizing, so there is no tendency for solutions to move toward equilibria. However, the user can observe that variables do fluctuate around certain trends. The trend growth rate for government spending is a parameter in the model, with the default value set to 0.03 (i.e., three percent per year). This drives the long-run dynamics of the system; as can be seen when the simulation is run, the long-run average rate of capital accumulation converges to the same value as the long-run average rate of growth for government spending. On the other hand, the long-run average value for the capacity utilization rate gravitates toward a targetted level, which by default is set to 0.7. 
                         </p>
 
 
