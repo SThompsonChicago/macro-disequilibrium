@@ -11,8 +11,6 @@ for(var i = 0; i <= 100; i++){
     times.push(i);
 }
 
-const gamma0 = 0.03;
-
 const styles = {
     hov: {
       cursor: 'pointer',
@@ -43,7 +41,7 @@ const initialState = {
     time: 0,
     periods: 0,
     mil: 250,
-    gamma: gamma0 + 0.01 * (Math.random() - 0.5),
+    gamma: 0.03 + 0.01 * (Math.random() - 0.5),
     rho: 0.5,
     theta: 0.6,
     tau: 0.3,
@@ -55,6 +53,8 @@ const initialState = {
     capB: 0.04,
     xi: 25,
     sigma: 0.4,
+    gamma0: 0.03,
+    sd: 0.02,
 }
 
 export default function Home() {
@@ -81,16 +81,20 @@ export default function Home() {
                             About this page
                             </p>
                             <p>
-                            This is a web application intended to help the user visualize the dynamics of a macroeconomic model. A distinguishing feature of the model is the fact that, rather than relying on the concept of equilibrium, long-run dynamics are understood in terms of time averages. This means variables can fluctuate in complex and unpredictable ways, but the long-run averages converge toward values that are calculated using simple formulas. 
+                            This is a web application intended to help the user visualize the dynamics of a macroeconomic model from <a href="https://onlinelibrary.wiley.com/doi/10.1111/meca.12377">this article</a>. A distinguishing feature of the model is the fact that, rather than relying on the (empirically dubious) concept of equilibrium, the dynamics are understood by calculating time averages. This means variables can fluctuate in complex and unpredictable ways, but the long-run trends display important regularities that can be predicted with simple mathematical formulae. 
                             <br/>
                             <br/>
-                            To see how this works, click the "RUN" button in the control panel below. Underneath the control panel, the graphs display animations describing the dynamics of different variables in the model. Scroll down further to see additional information about the model. 
+                            To see how the model works, click the "Run" button in the control panel below. Underneath the control panel, the graphs display animations describing the dynamics of different variables in the model. Scroll down further to see more detailed information. 
                         </p>
 
 
             </div>
-            <div className="box">
-            <p className="title is-4 is-size-6-mobile">
+            
+
+<div class="tile is-ancestor">
+  <div class="tile is-parent">
+    <article class="tile is-child box">
+    <p className="title is-4 is-size-6-mobile">
                             Control panel
                         </p>
         <header className="navbar">
@@ -114,65 +118,152 @@ export default function Home() {
     </a>
 
         </header>
-        
+    </article>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child box">
+    <p className="title is-4 is-size-6-mobile">
+                            Government expenditures
+                        </p>
+                        <p>
+                          Mean annual growth rate: {state.gamma0.toFixed(2)}
+                          <br>
+                            </br>
+                        
+                          
+                          <a className="button is-black is-small"
+  style={styles.space}
+  onClick={() => dispatch({ type: "increasegamma0" })}
+    >
+      <span>+</span>
+    </a>
+    <a className="button is-black is-small"
+  style={styles.space}
+  onClick={() => dispatch({ type: "decreasegamma0" })}
+    >
+      <span>-</span>
+    </a>
+    <br>
+                            </br>
+                        </p>
+                        <p>
+                          Standard deviation: {Math.abs(state.sd.toFixed(2))}
+                          <br>
+                            </br>
+                        
+                          
+                          <a className="button is-black is-small"
+  style={styles.space}
+  onClick={() => dispatch({ type: "increasesd" })}
+    >
+      <span>+</span>
+    </a>
+    <a className="button is-black is-small"
+  style={styles.space}
+  onClick={() => dispatch({ type: "decreasesd" })}
+    >
+      <span>-</span>
+    </a>
+                        </p>
+    </article>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child box">
+    <p className="title is-4 is-size-6-mobile">
+                            Consumer spending
+                        </p>
+                        <p>
+                          Target financial assets/income ratio: {state.sigma.toFixed(2)}
+                          <br>
+                            </br>
+                        
+                          
+                          <a className="button is-black is-small"
+  style={styles.space}
+  onClick={() => dispatch({ type: "increasesigma" })}
+    >
+      <span>+</span>
+    </a>
+    <a className="button is-black is-small"
+  style={styles.space}
+  onClick={() => dispatch({ type: "decreasesigma" })}
+    >
+      <span>-</span>
+    </a>
+    <br>
+                            </br>
+                        </p>
+                        <p>
+                          Adjustment speed: {state.xi.toFixed(2)}
+                          <br>
+                            </br>
+                        
+                          
+                          <a className="button is-black is-small"
+  style={styles.space}
+  onClick={() => dispatch({ type: "increasexi" })}
+    >
+      <span>+</span>
+    </a>
+    <a className="button is-black is-small"
+  style={styles.space}
+  onClick={() => dispatch({ type: "decreasexi" })}
+    >
+      <span>-</span>
+    </a>
+                        </p>
+    </article>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child box">
+    <p className="title is-4 is-size-6-mobile">
+                            Investment
+                        </p>
+                        <p>
+                          Target capacity utilization rate: {state.gamma0.toFixed(2)}
+                          <br>
+                            </br>
+                        
+                          
+                          <a className="button is-black is-small"
+  style={styles.space}
+  onClick={() => dispatch({ type: "increasebeta" })}
+    >
+      <span>+</span>
+    </a>
+    <a className="button is-black is-small"
+  style={styles.space}
+  onClick={() => dispatch({ type: "decreasebeta" })}
+    >
+      <span>-</span>
+    </a>
+    <br>
+                            </br>
+                        </p>
+                        <p>
+                          Scaled adjustment speed: {state.gamma0.toFixed(2)}
+                          <br>
+                            </br>
+                        
+                          
+                          <a className="button is-black is-small"
+  style={styles.space}
+  onClick={() => dispatch({ type: "increasebeta" })}
+    >
+      <span>+</span>
+    </a>
+    <a className="button is-black is-small"
+  style={styles.space}
+  onClick={() => dispatch({ type: "decreasebeta" })}
+    >
+      <span>-</span>
+    </a>
+                        </p>
+    </article>
+  </div>
 </div>
 
-<div className='box'>
-<p className="title is-4 is-size-6-mobile">
-                            Government spending
-                        </p>
-<Line
-        data={{
-          labels: xValues(state.time),
-          datasets: [
-            {
-              label: 'Growth rate of government spending',
-              data: state.govHatVals,
-              // backgroundColor: [
-              //   'rgba(255, 99, 132, 0.2)',
-              //   'rgba(54, 162, 235, 0.2)',
-              //   'rgba(255, 206, 86, 0.2)',
-              //   'rgba(75, 192, 192, 0.2)',
-              //   'rgba(153, 102, 255, 0.2)',
-              //   'rgba(255, 159, 64, 0.2)',
-              // ],
-              backgroundColor: 'white',
-              borderColor: 'blue',
-              fill: false,
-              cubicInterpolationMode: 'monotone',
-              interaction: {
-                intersect: false
-              },
-              radius: 0,
-            },
-            {
-              label: 'Long-run average growth rate',
-              data: state.govHatAve,
-              backgroundColor: 'white',
-              borderColor: 'red',
-              fill: false,
-              cubicInterpolationMode: 'monotone',
-              interaction: {
-                intersect: false
-              },
-              radius: 0,
-            },
-          ],
-        }}
-        options={{
-          responsive: true,
-          plugins: {
-            legend: {
-              position: 'top',
-            },
-            title: {
-              display: true,
-              text: 'Chart.js Line Chart'
-            }
-          }
-        }}
-      />
-</div>
+
 <div className='box'>
 <p className="title is-4 is-size-6-mobile">
                             Capital accumulation
@@ -193,7 +284,7 @@ export default function Home() {
               //   'rgba(255, 159, 64, 0.2)',
               // ],
               backgroundColor: 'white',
-              borderColor: 'blue',
+              borderColor: '#A00000',
               fill: false,
               cubicInterpolationMode: 'monotone',
               interaction: {
@@ -205,7 +296,7 @@ export default function Home() {
               label: 'Long-run average rate of accumulation',
               data: state.kHatAve,
               backgroundColor: 'white',
-              borderColor: 'red',
+              borderColor: 'black',
               fill: false,
               cubicInterpolationMode: 'monotone',
               interaction: {
@@ -249,7 +340,7 @@ export default function Home() {
               //   'rgba(255, 159, 64, 0.2)',
               // ],
               backgroundColor: 'white',
-              borderColor: 'blue',
+              borderColor: '#A00000',
               fill: false,
               cubicInterpolationMode: 'monotone',
               interaction: {
@@ -261,7 +352,7 @@ export default function Home() {
               label: 'Long-run average rate of capacity utilization',
               data: state.uAve,
               backgroundColor: 'white',
-              borderColor: 'red',
+              borderColor: 'black',
               fill: false,
               cubicInterpolationMode: 'monotone',
               interaction: {
@@ -285,25 +376,79 @@ export default function Home() {
         }}
       />
 </div>
+
+<div className='box'>
+<p className="title is-4 is-size-6-mobile">
+                            Government spending
+                        </p>
+<Line
+        data={{
+          labels: xValues(state.time),
+          datasets: [
+            {
+              label: 'Growth rate of government spending',
+              data: state.govHatVals,
+              // backgroundColor: [
+              //   'rgba(255, 99, 132, 0.2)',
+              //   'rgba(54, 162, 235, 0.2)',
+              //   'rgba(255, 206, 86, 0.2)',
+              //   'rgba(75, 192, 192, 0.2)',
+              //   'rgba(153, 102, 255, 0.2)',
+              //   'rgba(255, 159, 64, 0.2)',
+              // ],
+              backgroundColor: 'white',
+              borderColor: '#A00000',
+              fill: false,
+              cubicInterpolationMode: 'monotone',
+              interaction: {
+                intersect: false
+              },
+              radius: 0,
+            },
+            {
+              label: 'Long-run average growth rate',
+              data: state.govHatAve,
+              backgroundColor: 'white',
+              borderColor: 'black',
+              fill: false,
+              cubicInterpolationMode: 'monotone',
+              interaction: {
+                intersect: false
+              },
+              radius: 0,
+            },
+          ],
+        }}
+        options={{
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Chart.js Line Chart'
+            }
+          }
+        }}
+      />
+</div>
+
+
 <div className="box">
             <p className="title is-4 is-size-6-mobile">
                             Disequilibrium macroeconomics
                             </p>
                             <p>
                             Is the US economy a system in equilibrium? How about the world economy? Economists have debated these sorts of questions for a long time. 
-                            In principle, any observed economic dynamics can be interpreted as a series of equilibrium states, and many economists continue to argue that the concept of equilibrium is a useful analytical tool. 
-                            However, to have a plausible equilibrium-based theory, one needs to give an explanation of what forces keep economies at or near their equilibrium positions. If an economic system is perturbed by, say, a natural disaster or the discovery of a new invention, then the concept of equilibrium is only going to be relevant if some plausible mechanism exists that tends to restore the economy toward its equilibrium state. This tendency, in which economies move toward equilibriua, is called <i>stability</i>. And economists have struggled to establish conclusively that modern economies have this stability property. 
+                            In principle (and given suitable definitions), any observed economic dynamics can be interpreted as a series of equilibrium states, and many economists continue to argue that the concept of equilibrium is a useful analytical tool. 
+                            However, to have a plausible equilibrium-based theory, one needs to provide some account of the forces that would keep economies at or near their equilibrium positions. If an economy is perturbed from its equilibrium by, say, a natural disaster or the discovery of a new invention, then there would need to be some built-in tendency for the economy to move back toward its equilibrium state. This tendency, when it exists, is called <i>stability</i>. And economists have struggled to establish conclusively that modern economies have this stability property. 
                             <br>
                             </br>
                             <br>
                             </br>
                             A key stumbling block is the fact that modern economic systems are comprised of billions of interacting variables (consumers, businesses, commodities, prices and so on). Generally it is very difficult to establish stability for systems that have more than a few different variables. Moreover, when a system has a large number of variables, there are good reasons to expect it to be chaotic, rather than stable. Finally, the famous Sonnenschein-Mantel-Debreu theorem suggests that, if we adopt the standard notions of equilibrium and price adjustment from economic theory, then stability cannot be guaranteed. 
-                            <br>
-                            </br>
-                            <br>
-                            </br>
-                            Motivated by this reasoning, various economists have devised models that do not rely on the concept of equilibrium. The purpose of this app is to illustrate one such model, which is based on a <a href="https://onlinelibrary.wiley.com/doi/10.1111/meca.12377">paper of mine</a> published in the journal <i>Metroeconomica</i>. The basic idea is to use time averages, instead of equilibria, to understand the dynamics. This web application allows the user to run simulations of the model using the control panel below, and see how different parameter inputs affect the dynamics.
-                        </p>
+                            </p>
 
 
             </div>
@@ -312,17 +457,22 @@ export default function Home() {
                             A sketch of the model
                             </p>
                             <p>
-                            The methodology is largely based on the stock-flow consistent approach developed by Wynne Godley. Godley was one of the few economists who were able to <a href="https://www.ft.com/content/452dc484-9bdc-11de-b214-00144feabdc0">"see the crisis coming"</a> in the run up to the 2007-2008 global crash. The key feature of his analysis is the the attention paid to how monetary transactions between different sectors interact with an aggregate financial structure. Since the financial assets of one sector must be the liabilities of another, if all sectors try to increase their net financial assets at the same time, the system can go into free fall. 
+                            This app is based on the model in a recently published paper, which is available <a href="">here</a>. A much shorter statement of the model used in this app (with details about the simulations), which just lays out the basic assumptions and equations, can be found <a href="">here</a>. What follows below is a non-technical explanation. 
                             <br>
                             </br>
                             <br>
                             </br>
-                            The mechanics of this model can be understood as follows. Businesses try to increase (or at least maintain) their market shares over time, which means they must try to keep up with the growth of consumer demand. So they adjust output, as well as investment in new productive capacity, in response to changes in the demand for their products. But there are also limits on how much businesses can (or want) to borrow, and this means that there is an upper limit for how rapidly they can expand productive capacity, with this limit depending on expectations regarding future cashflow. On the other hand, consumers also face an important financial constraint, and this is expressed by the fact that they adjust their spending based on how much cash they have to spend. More precisely, they seek to keep their net financial wealth at a certain targeted level in relation to national income, and adjust spending over time in an attempt to meet this target. 
+                            The methodology for this model is largely based on the stock-flow consistent approach developed by Wynne Godley. Godley was one of the few economists who were able to <a href="https://www.ft.com/content/452dc484-9bdc-11de-b214-00144feabdc0">"see the crisis coming"</a> in the run up to the 2007-2008 global crash. The key feature of his analysis is the recognition of how monetary transactions between different sectors in an economy are linked together by an aggregate financial structure. One implication is that, since the financial assets of one sector must be the liabilities of another, if all sectors try to increase their net financial assets at the same time, the system can go into free fall. 
                             <br>
                             </br>
                             <br>
                             </br>
-                            An important feature of the model is that productive investment and consumption demand are largely induced, in the sense that they respond to changes in financial inflows from other sectors. As a result, if there is a third component of aggregate demand that can grow at a semi-autonomous rate, then it can play a special role in driving the aggregate rate of expansion for the economy. Economists have identified a variety of different components that might fullfill this role in practice, including government spending, exports, and debt-financed real-estate investment. For the purposes of illustration, the model here only considers the role of government spending, but it could easily be generalized to include exports and real-estate mortgages as well. 
+                            The mechanics of this model can be understood as follows. Businesses try to increase (or at least maintain) their market shares over time, which means they must try to keep up with changes in the demand for their products. So they adjust output, as well as investment in new productive capacity, in response to the market. But there are also limits on how much businesses can (or want) to borrow, and this means that there is an upper limit for how rapidly they can expand productive capacity; this limit depends on expectations regarding future cashflow. Similarly, consumers also face an important financial constraint, and this is expressed by the fact that they adjust their spending based on how much cash they have to spend. More precisely, they seek to keep their net financial wealth at a certain targeted level in relation to national income, and adjust spending over time in an attempt to meet this target. (This targetted ratio of wealth to income is called a <i>stock-flow norm</i>.)
+                            <br>
+                            </br>
+                            <br>
+                            </br>
+                            An important feature of the model is that productive investment and consumption demand are largely <i>induced</i>, in the sense that they respond to changes in financial inflows from other sectors. As a result, if there is a third component of aggregate demand that grows at a semi-autonomous rate, then it will play a special role in driving the rate of expansion for the economy for the economy as a whole. Economists have identified a variety of different components that might fullfill this role in practice, including government spending, exports, and debt-financed real-estate investment. For the purposes of illustration, the model here only considers the role of government spending, but it could easily be generalized to include exports and real-estate mortgages as well. 
 
                         </p>
 
@@ -338,8 +488,8 @@ function xValues(n){
     return arr;
 }
 
-function update(arr1, arr2, n){
-    var num = gamma0 + 0.06 * (Math.random() - 0.5);
+function update(arr1, arr2, n, gamma0, sd){
+    var num = gamma0 + sd * 3.4641016 * (Math.random() - 0.5);
     var num2 = 0;
     arr1.push(num);
     num2 = arr1.reduce((x, y) => x+y);
@@ -436,7 +586,19 @@ function reducer(state, action){
         case "reset":
             return {...state, isRunning: false, time: 0, govHatVals: [], govHatAve: [], kHatVals: [], kHatAve: [], uVals: [], uAve: []};
         case "iterate":
-            return {...state, time: state.time + 1, gamma: update(state.govHatVals, state.govHatAve, state.time + 1), govHatVals: state.govHatVals, govHatAve: state.govHatAve, stateVals: rk(state.stateVals, state)};
+            return {...state, time: state.time + 1, gamma: update(state.govHatVals, state.govHatAve, state.time + 1, state.gamma0, state.sd), govHatVals: state.govHatVals, govHatAve: state.govHatAve, stateVals: rk(state.stateVals, state)};
+        case "increasegamma0":
+            return {...state, gamma0: (state.gamma0 < 0.05) * (state.gamma0 + 0.01) + (state.gamma0 >= 0.05) * 0.05};
+        case "decreasegamma0":
+            return {...state, gamma0: (state.gamma0 > 0.01) * (state.gamma0 - 0.01) + (state.gamma0 <= 0.01) * 0.01};
+        case "increasesd":
+            return {...state, sd: (state.sd < 0.06) * (state.sd + 0.01) + (state.sd >= 0.06) * 0.06};
+        case "decreasesd":
+            return {...state, sd: (state.sd > 0.01) * (state.sd - 0.01) + (state.sd <= 0.01) * 0.01};
+        case "increasesigma":
+            return {...state, sigma: (state.sigma < 2) * (state.sigma + 0.1) + (state.sigma >= 2) * 2};
+        case "decreasesigma":
+              return {...state, sigma: (state.sigma > 0.1) * (state.sigma - 0.1) + (state.sigma <= 0.1) * 0.1};
         default:
             throw new Error();
     }
