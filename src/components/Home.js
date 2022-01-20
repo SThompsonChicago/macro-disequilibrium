@@ -220,20 +220,20 @@ export default function Home() {
                             Investment
                         </p>
                         <p>
-                          Target capacity utilization rate: {state.gamma0.toFixed(2)}
+                          Target capacity utilization rate: {state.ud.toFixed(2)}
                           <br>
                             </br>
                         
                           
                           <a className="button is-black is-small"
   style={styles.space}
-  onClick={() => dispatch({ type: "increasebeta" })}
+  onClick={() => dispatch({ type: "increaseud" })}
     >
       <span>+</span>
     </a>
     <a className="button is-black is-small"
   style={styles.space}
-  onClick={() => dispatch({ type: "decreasebeta" })}
+  onClick={() => dispatch({ type: "decreaseud" })}
     >
       <span>-</span>
     </a>
@@ -241,20 +241,20 @@ export default function Home() {
                             </br>
                         </p>
                         <p>
-                          Scaled adjustment speed: {state.gamma0.toFixed(2)}
+                          Scaled adjustment speed: {(state.eta * 0.02 * 0.02).toFixed(2)}
                           <br>
                             </br>
                         
                           
                           <a className="button is-black is-small"
   style={styles.space}
-  onClick={() => dispatch({ type: "increasebeta" })}
+  onClick={() => dispatch({ type: "increaseeta" })}
     >
       <span>+</span>
     </a>
     <a className="button is-black is-small"
   style={styles.space}
-  onClick={() => dispatch({ type: "decreasebeta" })}
+  onClick={() => dispatch({ type: "decreaseeta" })}
     >
       <span>-</span>
     </a>
@@ -599,6 +599,18 @@ function reducer(state, action){
             return {...state, sigma: (state.sigma < 2) * (state.sigma + 0.1) + (state.sigma >= 2) * 2};
         case "decreasesigma":
               return {...state, sigma: (state.sigma > 0.1) * (state.sigma - 0.1) + (state.sigma <= 0.1) * 0.1};
+        case "increasexi":
+            return {...state, xi: (state.xi < 1000) * (state.xi + 5) + (state.xi >= 1000) * 1000};
+        case "decreasexi":
+              return {...state, xi: (state.xi > 5) * (state.xi - 5) + (state.xi <= 5) * 5};
+        case "increaseud":
+              return {...state, ud: (state.ud < 0.9) * (state.ud + 0.05) + (state.ud >= 0.9) * 0.9};
+        case "decreaseud":
+              return {...state, ud: (state.ud > 0.65) * (state.ud - 0.05) + (state.ud <= 0.65) * 0.65};
+        case "increaseeta":
+              return {...state, eta: (state.eta < 5000) * (state.eta + 50) + (state.eta >= 5000) * 5000};
+        case "decreaseeta":
+              return {...state, eta: (state.eta > 50) * (state.eta - 50) + (state.eta <= 50) * 50};
         default:
             throw new Error();
     }
