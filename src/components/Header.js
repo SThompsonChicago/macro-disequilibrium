@@ -14,17 +14,17 @@ const styles = {
 
 function Header() {
     return (
-        <div>
-        <section className="hero is-link is-size-6-mobile">
+        <div className="is-black">
+        <section className="hero notification is-black is-size-6-mobile">
             
         <div className="hero-body">
                 <article className="media">
-                    {/* <div className="media-left">
+                    <div className="media-left">
                     <figure className="image is-64x64"
                     >
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Rosa_Luxemburg_%28cropped%29.jpg" alt="Image"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Rosa_Luxemburg_NYPL.jpg" alt="Image"/>
       </figure>                
-      </div> */}
+      </div>
       <div className="media-content">
                 <p className="title is-size-4-mobile">
                     Macroeconomic Disequilibrium Simulator

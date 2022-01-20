@@ -1,5 +1,6 @@
 import { useReducer, useEffect, useRef } from 'react';
 import Header from './Header';
+import Footer from './Footer';
 import { Line, defaults, Bubble } from 'react-chartjs-2'
 
 defaults.global.tooltips.enabled = false
@@ -23,10 +24,10 @@ const styles = {
       margin:"5px",
     },
     red: {
-      backgroundColor:'blue',
+      backgroundColor:'black',
       color:'white',
       margin:"3px",
-      fontWeight:1000,
+      //fontWeight:1000,
     },
   }
 
@@ -73,47 +74,17 @@ export default function Home() {
     }, [state.isRunning]);
 
     return (
-        <div>
+        <div className="notification is-black">
             <Header />
             <div className="box">
             <p className="title is-4 is-size-6-mobile">
-                            About this app
+                            About this page
                             </p>
                             <p>
-                            Is the US economy a system in equilibrium? How about the world economy? Economists have debated these sorts of questions for a long time. 
-                            In principle, any observed economic dynamics can be interpreted as a series of equilibrium states, and many economists continue to argue that the concept of equilibrium is a useful analytical tool. 
-                            However, to have a plausible equilibrium-based theory, one needs to give an explanation of what forces keep economies at or near their equilibrium positions. If an economic system is perturbed by, say, a natural disaster or the discovery of a new invention, then the concept of equilibrium is only going to be relevant if some plausible mechanism exists that tends to restore the economy toward its equilibrium state. This tendency, in which economies move toward equilibriua, is called <i>stability</i>. And economists have struggled to establish conclusively that modern economies have this stability property. 
-                            <br>
-                            </br>
-                            <br>
-                            </br>
-                            A key stumbling block is the fact that modern economic systems are comprised of billions of interacting variables (consumers, businesses, commodities, prices and so on). Generally it is very difficult to establish stability for systems that have more than a few different variables. Moreover, when a system has a large number of variables, there are good reasons to expect it to be chaotic, rather than stable. Finally, the famous Sonnenschein-Mantel-Debreu theorem suggests that, if we adopt the standard notions of equilibrium and price adjustment from economic theory, then stability cannot be guaranteed. 
-                            <br>
-                            </br>
-                            <br>
-                            </br>
-                            Motivated by this reasoning, various economists have devised models that do not rely on the concept of equilibrium. The purpose of this app is to illustrate one such model, which is based on a <a href="https://onlinelibrary.wiley.com/doi/10.1111/meca.12377">paper of mine</a> published in the journal <i>Metroeconomica</i>. The basic idea is to use time averages, instead of equilibria, to understand the dynamics. This web application allows the user to run simulations of the model using the control panel below, and see how different parameter inputs affect the dynamics.
-                        </p>
-
-
-            </div>
-            <div className="box">
-            <p className="title is-4 is-size-6-mobile">
-                            A sketch of the model
-                            </p>
-                            <p>
-                            The mechanics of this model can be understood as follows. Businesses try to increase (or at least maintain) their market shares over time, which means they must try to keep up with the growth of consumer demand. So they adjust output, as well as investment in new productive capacity, in response to changes in the demand for their products. But there are also limits on how much businesses can (or want) to borrow, and this means that there is an upper limit for how rapidly they can expand productive capacity, with this limit depending on expectations regarding future cashflow. On the other hand, consumers also face an important financial constraint, and this is expressed by the fact that they adjust their spending based on how much cash they have to spend. More precisely, they seek to keep their net financial wealth at a certain targeted level in relation to national income, and adjust spending over time in an attempt to meet this target. 
-                            <br>
-                            </br>
-                            <br>
-                            </br>
-                            The methodology is largely based on the stock-flow consistent approach developed by Wynne Godley. Godley was one of the few economists who were able to <a href="https://www.ft.com/content/452dc484-9bdc-11de-b214-00144feabdc0">"see the crisis coming"</a> in the run up to the 2007-2008 global crash. The key feature of his analysis is the the attention paid to how monetary transactions between different sectors interact with an aggregate financial structure. Since the financial assets of one sector must be the liabilities of another, if all sectors try to increase their net financial assets at the same time, the system can go into free fall. 
-                            <br>
-                            </br>
-                            <br>
-                            </br>
-                            An important feature of the model is that productive investment and consumption demand are largely induced, in the sense that they respond to changes in financial inflows from other sectors. As a result, if there is a third component of aggregate demand that can grow at a semi-autonomous rate, then it can play a special role in driving the aggregate rate of expansion for the economy. Economists have identified a variety of different components that might fullfill this role in practice, including government spending, exports, and debt-financed real-estate investment. For the purposes of illustration, the model here only considers the role of government spending, but it could easily be generalized to include exports and real-estate mortgages as well. 
-
+                            This is a web application intended to help the user visualize the dynamics of a macroeconomic model. A distinguishing feature of the model is the fact that, rather than relying on the concept of equilibrium, long-run dynamics are understood in terms of time averages. This means variables can fluctuate in complex and unpredictable ways, but the long-run averages converge toward values that are calculated using simple formulas. 
+                            <br/>
+                            <br/>
+                            To see how this works, click the "RUN" button in the control panel below. Underneath the control panel, the graphs display animations describing the dynamics of different variables in the model. Scroll down further to see additional information about the model. 
                         </p>
 
 
@@ -127,19 +98,19 @@ export default function Home() {
   style={styles.red}
   onClick={() => dispatch({ type: "run" })}
     >
-      <span>RUN</span>
+      <span>Run</span>
     </a>
     <a className="button"
     style={styles.red}
     onClick={() => dispatch({ type: "stop" })}
     >
-      <span>STOP</span>
+      <span>Pause</span>
     </a>
     <a className="button"
     style={styles.red}
     onClick={() => dispatch({ type: "reset" })}
     >
-      <span>RESET</span>
+      <span>Reset</span>
     </a>
 
         </header>
@@ -314,6 +285,50 @@ export default function Home() {
         }}
       />
 </div>
+<div className="box">
+            <p className="title is-4 is-size-6-mobile">
+                            Disequilibrium macroeconomics
+                            </p>
+                            <p>
+                            Is the US economy a system in equilibrium? How about the world economy? Economists have debated these sorts of questions for a long time. 
+                            In principle, any observed economic dynamics can be interpreted as a series of equilibrium states, and many economists continue to argue that the concept of equilibrium is a useful analytical tool. 
+                            However, to have a plausible equilibrium-based theory, one needs to give an explanation of what forces keep economies at or near their equilibrium positions. If an economic system is perturbed by, say, a natural disaster or the discovery of a new invention, then the concept of equilibrium is only going to be relevant if some plausible mechanism exists that tends to restore the economy toward its equilibrium state. This tendency, in which economies move toward equilibriua, is called <i>stability</i>. And economists have struggled to establish conclusively that modern economies have this stability property. 
+                            <br>
+                            </br>
+                            <br>
+                            </br>
+                            A key stumbling block is the fact that modern economic systems are comprised of billions of interacting variables (consumers, businesses, commodities, prices and so on). Generally it is very difficult to establish stability for systems that have more than a few different variables. Moreover, when a system has a large number of variables, there are good reasons to expect it to be chaotic, rather than stable. Finally, the famous Sonnenschein-Mantel-Debreu theorem suggests that, if we adopt the standard notions of equilibrium and price adjustment from economic theory, then stability cannot be guaranteed. 
+                            <br>
+                            </br>
+                            <br>
+                            </br>
+                            Motivated by this reasoning, various economists have devised models that do not rely on the concept of equilibrium. The purpose of this app is to illustrate one such model, which is based on a <a href="https://onlinelibrary.wiley.com/doi/10.1111/meca.12377">paper of mine</a> published in the journal <i>Metroeconomica</i>. The basic idea is to use time averages, instead of equilibria, to understand the dynamics. This web application allows the user to run simulations of the model using the control panel below, and see how different parameter inputs affect the dynamics.
+                        </p>
+
+
+            </div>
+            <div className="box">
+            <p className="title is-4 is-size-6-mobile">
+                            A sketch of the model
+                            </p>
+                            <p>
+                            The methodology is largely based on the stock-flow consistent approach developed by Wynne Godley. Godley was one of the few economists who were able to <a href="https://www.ft.com/content/452dc484-9bdc-11de-b214-00144feabdc0">"see the crisis coming"</a> in the run up to the 2007-2008 global crash. The key feature of his analysis is the the attention paid to how monetary transactions between different sectors interact with an aggregate financial structure. Since the financial assets of one sector must be the liabilities of another, if all sectors try to increase their net financial assets at the same time, the system can go into free fall. 
+                            <br>
+                            </br>
+                            <br>
+                            </br>
+                            The mechanics of this model can be understood as follows. Businesses try to increase (or at least maintain) their market shares over time, which means they must try to keep up with the growth of consumer demand. So they adjust output, as well as investment in new productive capacity, in response to changes in the demand for their products. But there are also limits on how much businesses can (or want) to borrow, and this means that there is an upper limit for how rapidly they can expand productive capacity, with this limit depending on expectations regarding future cashflow. On the other hand, consumers also face an important financial constraint, and this is expressed by the fact that they adjust their spending based on how much cash they have to spend. More precisely, they seek to keep their net financial wealth at a certain targeted level in relation to national income, and adjust spending over time in an attempt to meet this target. 
+                            <br>
+                            </br>
+                            <br>
+                            </br>
+                            An important feature of the model is that productive investment and consumption demand are largely induced, in the sense that they respond to changes in financial inflows from other sectors. As a result, if there is a third component of aggregate demand that can grow at a semi-autonomous rate, then it can play a special role in driving the aggregate rate of expansion for the economy. Economists have identified a variety of different components that might fullfill this role in practice, including government spending, exports, and debt-financed real-estate investment. For the purposes of illustration, the model here only considers the role of government spending, but it could easily be generalized to include exports and real-estate mortgages as well. 
+
+                        </p>
+
+
+            </div>
+            <Footer/>
 </div>
     )
 }
