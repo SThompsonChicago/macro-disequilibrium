@@ -1,9 +1,11 @@
-# Macroeconomic Forecaster
+# Disequilibirum Macroeconomic Model Simulator
 
   Stephen Thompson (stephen.thompson@umbc.edu)
 
   This React.js app allows the user to choose inputs for a macroeconomic model, and then view an animation showing the results. The app solves the model using the Runge-Kutta method, and describes a disequilibrium framework in which users can understand the long-run dynamics with statistical calculations. It is based on work from an article I published in Metroeconomica, which can be found here:
   https://doi.org/10.1111/meca.12377
+
+  ![Example simulation.](assets/Example.png)
 
 
   ### Links
@@ -20,11 +22,11 @@
 
   ![User interface.](assets/macroui.png)
 
-  After clicking the "Run" button, the user can scroll down to see the dynamics of the model, which are displayed as animations in the graphs below. The graphs show the rate of capital accumulation, the rate of capacity utilization, and the growth rate of government spending, as long as the long-run average values of these variables. 
+  After clicking the "Run" button, the user can scroll down to see the dynamics of the model, which are displayed as animations in the graphs below. The graphs show the rate of capital accumulation, the rate of capacity utilization, and the growth rate of government spending, as well as the long-run average values of these variables. 
   
   ![Model Dynamics.](assets/macrodynamics.png)
   
-  The user can observe that the long-run averages converge to the predicted values derived in Thompson (2022). This model provides a disequilibrium framework understanding theories of growth driven by non-capacity-creating semi-autonomous demand, and thus extends work by others including Serrano (1995), Allain (2015), Lavoie (2016), Fiebiger (2018), Thompson (2021) and Pérez-Montiel and Pariboni (2021)
+  The user can observe that the long-run averages converge to the predicted values derived in Thompson (2022). This model provides a disequilibrium framework for understanding theories of growth driven by non-capacity-creating semi-autonomous demand, and thus builds on work by others including Serrano (1995), Allain (2015), Lavoie (2016), Fiebiger (2018), Thompson (2021) and Pérez-Montiel and Pariboni (2021)
   
   ### Contact
 
