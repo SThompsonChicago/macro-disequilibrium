@@ -48,13 +48,13 @@ const initialState = {
     psi: 0.5,
     i: 0.01,
     delta: 0.06,
-    ud: 0.7,
+    ud: 0.75,
     eta: 1000,
     capB: 0.04,
     xi: 25,
     sigma: 0.4,
     gamma0: 0.03,
-    sd: 0.02,
+    sd: 0.01,
 }
 
 export default function Home() {
