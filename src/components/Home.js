@@ -41,7 +41,7 @@ const initialState = {
     time: 0,
     periods: 0,
     mil: 250,
-    gamma: 0.03 + 0.01 * (Math.random() - 0.5),
+    gamma: 0.03,
     rho: 0.5,
     theta: 0.6,
     tau: 0.3,
@@ -49,12 +49,12 @@ const initialState = {
     i: 0.01,
     delta: 0.06,
     ud: 0.75,
-    eta: 1000,
+    eta: 2500,
     capB: 0.04,
-    xi: 25,
+    xi: 8,
     sigma: 0.4,
     gamma0: 0.03,
-    sd: 0.01,
+    sd: 0.0,
 }
 
 export default function Home() {
@@ -123,7 +123,7 @@ export default function Home() {
   <div class="tile is-parent">
     <article class="tile is-child box">
     <p className="title is-4 is-size-6-mobile">
-                            Government expenditures
+                            Exports + government expenditures
                         </p>
                         <p>
                           Mean annual growth rate: {state.gamma0.toFixed(2)}
@@ -379,14 +379,14 @@ export default function Home() {
 
 <div className='box'>
 <p className="title is-4 is-size-6-mobile">
-                            Government spending
+                            Exports + government spending
                         </p>
 <Line
         data={{
           labels: xValues(state.time),
           datasets: [
             {
-              label: 'Annual growth rate of government spending',
+              label: 'Annual growth rate of exports + government spending',
               data: state.govHatVals,
               // backgroundColor: [
               //   'rgba(255, 99, 132, 0.2)',
@@ -472,12 +472,12 @@ export default function Home() {
                             </br>
                             <br>
                             </br>
-                            An important feature of the model is that productive investment and consumption demand are largely <i>induced</i>, in the sense that they respond to changes in financial inflows from other sectors. As a result, if there is a third component of aggregate demand that grows at a semi-autonomous rate, then it will play a special role in driving the rate of expansion for the economy for the economy as a whole. Economists have identified a variety of different components that might fullfill this role in practice, including government spending, exports, and debt-financed real-estate investment. For the purposes of illustration, the model here only considers the role of government spending, but it could easily be generalized to include exports and real-estate mortgages as well. 
+                            An important feature of the model is that productive investment and consumption demand are largely <i>induced</i>, in the sense that they respond to changes in financial inflows from other sectors. As a result, if there is a third component of aggregate demand that grows at a semi-autonomous rate, then it will play a special role in driving the rate of expansion for the economy as a whole. Economists have identified a variety of different components that might fullfill this role in practice, including government spending, exports, and debt-financed real-estate investment. For the purposes of illustration, the model here only considers the role of government spending and exports, but it could easily be generalized in various ways. 
                             <br>
                             </br>
                             <br>
                             </br>
-                            The dynamical processes in this model tend to be destabilizing, so there is no tendency for solutions to move toward equilibria. However, the user can observe that variables do fluctuate around certain trends. The trend growth rate for government spending is a parameter in the model, with the default value set to 0.03 (i.e., three percent per year). This drives the long-run dynamics of the system; as can be seen when the simulation is run, the long-run average rate of capital accumulation converges to the same value as the long-run average rate of growth for government spending. On the other hand, the long-run average value for the capacity utilization rate gravitates toward a targetted level, which by default is set to 0.7. 
+                            The dynamical processes in this model tend to be destabilizing, so there is no tendency for solutions to move toward equilibria. However, the user can observe that variables do fluctuate around certain trends. The trend growth rate for the sume of exports and government spending is a parameter in the model, with the default value set to 0.03 (i.e., three percent per year). This drives the long-run dynamics of the system; as can be seen when the simulation is run, the long-run average rate of capital accumulation converges to the same value as the long-run average rate of growth for the sum of exports and government spending. On the other hand, the long-run average value for the capacity utilization rate gravitates toward a targetted level, which by default is set to 0.75 (i.e., seventy-five percent of full capacity). 
                         </p>
 
 
@@ -489,10 +489,18 @@ export default function Home() {
 
 function xValues(n){
     const arr = [...Array(n)].map((_, x) => x+1);
+    arr.pop();
     return arr;
 }
 
 function update(arr1, arr2, n, gamma0, sd){
+  if(sd === 0){
+    arr1.push(gamma0);
+    arr2.push(gamma0);
+
+    return gamma0;
+
+  } else{
     var num = gamma0 + sd * 3.4641016 * (Math.random() - 0.5);
     var num2 = 0;
     arr1.push(num);
@@ -500,8 +508,8 @@ function update(arr1, arr2, n, gamma0, sd){
     num2 = num2/n;
     arr2.push(num2);
 
-
     return num;
+  }
 }
 
 function f(arr, obj){
@@ -598,15 +606,15 @@ function reducer(state, action){
         case "increasesd":
             return {...state, sd: (state.sd < 0.06) * (state.sd + 0.01) + (state.sd >= 0.06) * 0.06};
         case "decreasesd":
-            return {...state, sd: (state.sd > 0.01) * (state.sd - 0.01) + (state.sd <= 0.01) * 0.01};
+            return {...state, sd: (state.sd > 0.0) * (Math.abs(state.sd - 0.01)) + (state.sd <= 0.0) * 0.0};
         case "increasesigma":
             return {...state, sigma: (state.sigma < 2) * (state.sigma + 0.1) + (state.sigma >= 2) * 2};
         case "decreasesigma":
               return {...state, sigma: (state.sigma > 0.1) * (state.sigma - 0.1) + (state.sigma <= 0.1) * 0.1};
         case "increasexi":
-            return {...state, xi: (state.xi < 1000) * (state.xi + 5) + (state.xi >= 1000) * 1000};
+            return {...state, xi: (state.xi < 10000) * (state.xi + 1) + (state.xi >= 10000) * 10000};
         case "decreasexi":
-              return {...state, xi: (state.xi > 5) * (state.xi - 5) + (state.xi <= 5) * 5};
+              return {...state, xi: (state.xi > 1) * (state.xi - 1) + (state.xi <= 1) * 1};
         case "increaseud":
               return {...state, ud: (state.ud < 0.9) * (state.ud + 0.05) + (state.ud >= 0.9) * 0.9};
         case "decreaseud":

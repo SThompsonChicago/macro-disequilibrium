@@ -26,7 +26,7 @@
   
   ![Model Dynamics.](assets/macrodynamics.png)
   
-  The user can observe that the long-run averages converge to the predicted values derived in Thompson (2022). This model provides a disequilibrium framework for understanding theories of growth driven by non-capacity-creating semi-autonomous demand, and thus builds on work by others including Serrano (1995), Allain (2015), Lavoie (2016), Fiebiger (2018), Thompson (2021) and Pérez-Montiel and Pariboni (2021)
+  The user can observe that the long-run averages converge to the predicted values derived in Thompson (2022). This model provides a disequilibrium framework for understanding theories of growth driven by non-capacity-creating semi-autonomous demand, and thus builds on work by others including Serrano (1995), Allain (2015), Lavoie (2016), Fiebiger (2018), Thompson (2020) and Pérez-Montiel and Pariboni (2021)
   
   ### Contact
 
